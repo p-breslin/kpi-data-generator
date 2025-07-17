@@ -3,11 +3,8 @@ from __future__ import annotations
 import json
 import logging
 import os
-from contextlib import contextmanager
-from pathlib import Path
 from typing import Any, Dict
 
-import duckdb
 import yaml
 from agno.models.google import Gemini
 from agno.models.openai import OpenAIChat
@@ -195,24 +192,6 @@ def safe_json(blob: Any) -> Dict[str, Any]:
         except json.JSONDecodeError:
             log.debug("Bad JSON blob ignored: %s", blob)
     return {}
-
-
-@contextmanager
-def db_manager(path: Path, *, read_only: bool = False):
-    """Context manager for managing a DuckDB connection.
-
-    Args:
-        path (Path): Filesystem path to the DuckDB database.
-        read_only (bool, optional): If True, opens the connection in read-only mode.
-
-    Yields:
-        duckdb.DuckDBPyConnection: An active DuckDB connection instance.
-    """
-    conn = duckdb.connect(path, read_only=read_only)
-    try:
-        yield conn
-    finally:
-        conn.close()
 
 
 def pydantic_to_gemini(output_model: BaseModel) -> str:
