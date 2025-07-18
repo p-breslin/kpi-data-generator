@@ -91,7 +91,7 @@ def main():
             }
             for r in resp["roles"]
         ]
-        print("\n--- Available Roles ---\n")
+        print("\n--- Roles ---\n")
         print(json.dumps(trimmed_roles, indent=2))
 
         # Contexts
