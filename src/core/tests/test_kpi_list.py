@@ -13,7 +13,7 @@ def get_kpi_list() -> List[str]:
     """Queries the database to get a unique list of all available KPI names.
 
     Returns:
-        A list of strings, where each string is a KPI name.
+        list[str]: list of strings, where each string is a KPI name.
     """
     log.info("Fetching list of KPIs from the database...")
 
